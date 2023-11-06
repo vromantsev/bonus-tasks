@@ -1,11 +1,8 @@
 package ua.hillel.lesson12;
 
-import ua.hillel.exceptions.ExerciseNotCompletedException;
 import ua.hillel.lesson12.model.Item;
 import ua.hillel.lesson12.model.Order;
 import ua.hillel.lesson12.model.Person;
-
-import java.util.Arrays;
 
 public class EncapsulationDemoService {
 
@@ -30,7 +27,6 @@ public class EncapsulationDemoService {
      * @param order order
      */
     public String createOrderInfo(Order order) {
-        // TODO - implement this method, so it can produce the output similar to an example above
         var sb = new StringBuilder();
         sb.append("User ").append(order.getPerson().getFullName()).append(" ordered the following items:\n");
         for (Item item : order.getItems()) {
@@ -52,9 +48,10 @@ public class EncapsulationDemoService {
      * @return order's total price
      */
     public int calculateTotalPrice(Order order) {
-        // TODO implement this method
-        return Arrays.stream(order.getItems())
-                .mapToInt(Item::getPrice)
-                .sum();
+        int totalPrice = order.getTotalPrice();
+        for (Item item : order.getItems()) {
+            totalPrice += item.getPrice();
+        }
+        return totalPrice;
     }
 }
