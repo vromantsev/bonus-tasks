@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ua.hillel.lesson12.model.Item;
 import ua.hillel.lesson12.model.Order;
+import ua.hillel.lesson12.model.Person;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -35,7 +36,7 @@ public class EncapsulationDemoServiceTest {
         TestItem iphone = new TestItem("iPhone 15 Pro Max", 1500);
         TestItem airPods = new TestItem("Air Pods", 200);
         TestOrder order = new TestOrder();
-        order.setTestPerson(person);
+        order.setPerson(person);
         order.setItems(new Item[]{iphone, airPods});
         String expected = """
                 User Ilya Ivanov ordered the following items:
@@ -60,7 +61,7 @@ public class EncapsulationDemoServiceTest {
         TestItem iphone = new TestItem("iPhone 15 Pro Max", 1500);
         TestItem airPods = new TestItem("Air Pods", 200);
         TestOrder order = new TestOrder();
-        order.setTestPerson(person);
+        order.setPerson(person);
         order.setItems(new Item[]{iphone, airPods});
         int expectedTotalPrice = 1700;
 
@@ -129,24 +130,24 @@ public class EncapsulationDemoServiceTest {
 
     public static class TestOrder extends Order {
 
-        private TestPerson person;
+        private Person person;
         private Item[] items;
         private int totalPrice;
 
         public TestOrder() {
         }
 
-        public TestOrder(TestPerson person, Item[] items, int totalPrice) {
+        public TestOrder(Person person, Item[] items, int totalPrice) {
             this.person = person;
             this.items = items;
             this.totalPrice = totalPrice;
         }
 
-        public TestPerson getTestPerson() {
+        public Person getPerson() {
             return person;
         }
 
-        public void setTestPerson(TestPerson person) {
+        public void setPerson(Person person) {
             this.person = person;
         }
 
@@ -198,7 +199,7 @@ public class EncapsulationDemoServiceTest {
         }
     }
 
-    public static class TestPerson {
+    public static class TestPerson extends Person {
 
         private String fullName;
         private String email;
