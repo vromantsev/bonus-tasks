@@ -5,6 +5,8 @@ import ua.hillel.lesson12.model.Item;
 import ua.hillel.lesson12.model.Order;
 import ua.hillel.lesson12.model.Person;
 
+import java.util.Arrays;
+
 public class EncapsulationDemoService {
 
     /**
@@ -29,7 +31,13 @@ public class EncapsulationDemoService {
      */
     public String createOrderInfo(Order order) {
         // TODO - implement this method, so it can produce the output similar to an example above
-        throw new ExerciseNotCompletedException();
+        var sb = new StringBuilder();
+        sb.append("User ").append(order.getPerson().getFullName()).append(" ordered the following items:\n");
+        for (Item item : order.getItems()) {
+            sb.append("- ").append(item.getName()).append(" costs ").append(item.getPrice()).append("$\n");
+        }
+        sb.append("Total price is ").append(calculateTotalPrice(order)).append("$");
+        return sb.toString();
     }
 
     /**
@@ -45,6 +53,8 @@ public class EncapsulationDemoService {
      */
     public int calculateTotalPrice(Order order) {
         // TODO implement this method
-        throw new ExerciseNotCompletedException();
+        return Arrays.stream(order.getItems())
+                .mapToInt(Item::getPrice)
+                .sum();
     }
 }
