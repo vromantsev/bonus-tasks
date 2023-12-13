@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>jpa-and-hibernate</module>
+        <module>unit-testing</module>
     </modules>
 
     <properties>
@@ -20,6 +21,9 @@
         <postgresql.version>42.7.0</postgresql.version>
         <lombok.version>1.18.30</lombok.version>
         <junit-jupiter.version>5.10.0</junit-jupiter.version>
+        <h2.version>2.2.224</h2.version>
+        <jfairy.version>0.6.5</jfairy.version>
+        <mockito-core.version>5.7.0</mockito-core.version>
     </properties>
 
     <dependencies>
@@ -39,9 +43,26 @@
             <version>${lombok.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.devskiller</groupId>
+            <artifactId>jfairy</artifactId>
+            <version>${jfairy.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

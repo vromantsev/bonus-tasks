@@ -1,5 +1,7 @@
 package ua.hillel.service;
 
+import ua.hillel.entity.Student;
+
 import java.util.List;
 
 public interface GenericDao<T, ID> {
@@ -12,7 +14,7 @@ public interface GenericDao<T, ID> {
 
     List<T> findAll();
 
-    void update(T entity);
+    Student update(T entity);
 
     boolean deleteById(ID id);
 
