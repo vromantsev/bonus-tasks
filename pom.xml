@@ -11,6 +11,7 @@
     <modules>
         <module>jpa-and-hibernate</module>
         <module>unit-testing</module>
+        <module>impl-examples</module>
     </modules>
 
     <properties>
@@ -19,7 +20,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hibernate-core.version>6.4.0.Final</hibernate-core.version>
         <postgresql.version>42.7.0</postgresql.version>
-        <lombok.version>1.18.30</lombok.version>
         <junit-jupiter.version>5.10.0</junit-jupiter.version>
         <h2.version>2.2.224</h2.version>
         <jfairy.version>0.6.5</jfairy.version>
@@ -36,11 +36,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>com.devskiller</groupId>
