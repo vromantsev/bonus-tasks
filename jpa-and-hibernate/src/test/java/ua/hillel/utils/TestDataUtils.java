@@ -33,7 +33,7 @@ public class TestDataUtils {
         Student student = new Student();
         student.setFirstName("Josh");
         student.setLastName("Long");
-        student.setEmail(email);
+        student.setEmail(email == null ? fairy.person().getEmail() : email);
         Homework homework = new Homework();
         homework.setDescription("test description");
         homework.setDeadline(LocalDate.now());

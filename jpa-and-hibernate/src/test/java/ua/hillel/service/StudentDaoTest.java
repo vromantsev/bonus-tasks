@@ -21,13 +21,13 @@ public class StudentDaoTest extends BaseJPATest {
     @Test
     public void whenSaveStudentThenStudentIsSavedSuccessfully() {
         // given
-        Student student = TestDataUtils.createStudent("j.l@spring.com");
+        var student = TestDataUtils.createStudent("j.l@spring.com");
 
         // when
         studentDao.save(student);
 
         // then
-        Student createdStudent = doInTxReturning(em -> em.createQuery("FROM Student s WHERE s.email = :email", Student.class)
+        var createdStudent = doInTxReturning(em -> em.createQuery("FROM Student s WHERE s.email = :email", Student.class)
                 .setParameter("email", student.getEmail())
                 .getSingleResult()
         );
@@ -39,13 +39,13 @@ public class StudentDaoTest extends BaseJPATest {
 
     @Test
     public void whenStudentIsNullThenFailWithException() {
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> this.studentDao.save(null));
+        var exception = assertThrows(NullPointerException.class, () -> this.studentDao.save(null));
         assertEquals("Parameter [student] must not be null!", exception.getMessage());
     }
 
     @Test
     public void whenNewStudentHasIdBeforeSavingThenFailWithException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        var exception = assertThrows(IllegalArgumentException.class, () -> {
             Student student = new Student();
             student.setId(1L);
             student.setFirstName("Josh");
@@ -59,14 +59,14 @@ public class StudentDaoTest extends BaseJPATest {
     @Test
     public void whenSearchForStudentByIdThenStudentIsFoundSuccessfully() {
         // given
-        Student newStudent = TestDataUtils.createStudent("test@gmail.com");
+        var newStudent = TestDataUtils.createStudent("test@gmail.com");
         studentDao.save(newStudent);
 
         // when
-        Student found = findStudent(newStudent.getEmail());
+        var found = findStudent(newStudent.getEmail());
 
         // then
-        Student student = this.studentDao.findById(found.getId());
+        var student = this.studentDao.findById(found.getId());
 
         // assertions & verification
         assertNotNull(student);
@@ -75,10 +75,10 @@ public class StudentDaoTest extends BaseJPATest {
     @Test
     public void whenSearchForStudentByIdThenStudentNotFound() {
         // given
-        Long fakeId = 123L;
+        var fakeId = 123L;
 
         // then
-        Student student = this.studentDao.findById(fakeId);
+        var student = this.studentDao.findById(fakeId);
 
         // assertions & verification
         assertNull(student);
@@ -87,7 +87,7 @@ public class StudentDaoTest extends BaseJPATest {
     @Test
     public void whenSearchForStudentByEmailThenStudentIsFound() {
         // given
-        Student student = TestDataUtils.createStudent("123-test@gmail.com");
+        var student = TestDataUtils.createStudent("123-test@gmail.com");
 
         // when
         doInTxReturning(em -> {
@@ -96,7 +96,7 @@ public class StudentDaoTest extends BaseJPATest {
         });
 
         // then
-        Student studentFromDatabase = this.studentDao.findByEmail(student.getEmail());
+        var studentFromDatabase = this.studentDao.findByEmail(student.getEmail());
 
         // assertions & verification
         assertNotNull(studentFromDatabase);
@@ -123,7 +123,7 @@ public class StudentDaoTest extends BaseJPATest {
         });
 
         // then
-        List<Student> studentsFromDatabase = this.studentDao.findAll();
+        var studentsFromDatabase = this.studentDao.findAll();
 
         // assertions & verification
         assertNotNull(studentsFromDatabase);
@@ -134,20 +134,95 @@ public class StudentDaoTest extends BaseJPATest {
     @Test
     public void whenUpdateStudentThenStudentIsUpdatedSuccessfully() {
         // given
+        var student = TestDataUtils.createStudent("josh.long@spring.io");
+        var firstNameUpdated = student.getFirstName() + " UPDATED";
+        var lastNameUpdated = student.getLastName() + " UPDATED";
 
         // when
+        doInTxReturning(em -> {
+            em.persist(student);
+            return null;
+        });
+        student.setFirstName(firstNameUpdated);
+        student.setLastName(lastNameUpdated);
 
         // then
+        var updatedStudent = this.studentDao.update(student);
 
         // assertions & verification
-
+        assertNotNull(updatedStudent);
+        assertEquals(firstNameUpdated, updatedStudent.getFirstName());
+        assertEquals(lastNameUpdated, updatedStudent.getLastName());
     }
 
-    // TODO update - fail if student == null
-    // TODO update - fail if student_id == null
+    @Test
+    public void whenUpdateStudentAndPassNullArgumentThenThrowException() {
+        // given
+        var expectedExceptionMessage = "Parameter [student] must not be null!";
 
-    // TODO delete - successful deletion
-    // TODO delete - fail if student_id == null
+        // then
+        var exception = assertThrows(NullPointerException.class, () -> this.studentDao.update(null));
+
+        // assertions & verification
+        assertEquals(expectedExceptionMessage, exception.getMessage());
+    }
+
+    @Test
+    public void whenUpdateStudentWithNullIdThenThrowException() {
+        // given
+        var student = TestDataUtils.createStudent(null);
+        var updated = "UPDATED";
+        var expectedExceptionMessage = "Student should have an id assigned before being updated!";
+
+        // when
+        doInTxReturning(em -> {
+            em.persist(student);
+            return null;
+        });
+
+        // then
+        student.setId(null);
+        student.setFirstName(student.getLastName() + updated);
+        student.setLastName(student.getLastName() + updated);
+        var exception = assertThrows(IllegalArgumentException.class, () -> this.studentDao.update(student));
+
+        // assertions & verification
+        assertEquals(expectedExceptionMessage, exception.getMessage());
+    }
+
+    @Test
+    public void whenDeleteStudentThenOperationSuccessful() {
+        // given
+        var student = TestDataUtils.createStudent(null);
+
+        // when
+        doInTxReturning(em -> {
+            em.persist(student);
+            return null;
+        });
+        Student studentFromDatabase = this.studentDao.findAll().stream()
+                .filter(s -> s.getEmail().equals(student.getEmail()))
+                .findAny()
+                .orElseThrow();
+
+        // then
+        boolean isDeleted = this.studentDao.deleteById(studentFromDatabase.getId());
+
+        // assertions & verification
+        assertTrue(isDeleted);
+    }
+
+    @Test
+    public void whenDeleteStudentWithNullIDThenThrowException() {
+        // given
+        var expectedExceptionMessage = "Parameter [id] must not be null!";
+
+        // then
+        var exception = assertThrows(NullPointerException.class, () -> this.studentDao.deleteById(null));
+
+        // assertions & verification
+        assertEquals(expectedExceptionMessage, exception.getMessage());
+    }
 
     private Student findStudent(final String email) {
         return doInTxReturning(em -> em.createQuery("FROM Student", Student.class).getResultList()).stream()
