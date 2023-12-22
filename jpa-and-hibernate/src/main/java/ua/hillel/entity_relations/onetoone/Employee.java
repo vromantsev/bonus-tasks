@@ -8,15 +8,6 @@ import jakarta.persistence.Table;
 
 import java.util.Objects;
 
-/**
- * todo:
- * - configure JPA entity
- * - specify table name: "employee"
- * - configure auto generated identifier
- * - configure not nullable columns: email, firstName, lastName
- *
- * - map unidirectional relation between {@link Employee} and {@link EmployeeProfile} on the child side
- */
 @Entity
 @Table(name = "employee")
 public class Employee {

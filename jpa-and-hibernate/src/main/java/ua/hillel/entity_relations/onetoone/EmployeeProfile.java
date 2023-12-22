@@ -10,14 +10,6 @@ import jakarta.persistence.Table;
 
 import java.util.Objects;
 
-/**
- * todo:
- * - configure JPA entity
- * - specify table name: "employee_profile"
- * - configure not nullable columns: position, department
- *
- * - map relation between {@link Employee} and {@link EmployeeProfile} using foreign_key column: "employee_id"
- */
 @Entity
 @Table(name = "employee_profile")
 public class EmployeeProfile {
