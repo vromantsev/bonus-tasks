@@ -1,6 +1,6 @@
-package ua.hillel.service;
+package ua.hillel.homework.service;
 
-import ua.hillel.entity.Student;
+import ua.hillel.homework.entity.Student;
 
 import java.util.List;
 

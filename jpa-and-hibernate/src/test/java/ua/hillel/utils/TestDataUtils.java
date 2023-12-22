@@ -2,8 +2,8 @@ package ua.hillel.utils;
 
 import com.devskiller.jfairy.Fairy;
 import com.devskiller.jfairy.producer.person.Person;
-import ua.hillel.entity.Homework;
-import ua.hillel.entity.Student;
+import ua.hillel.homework.entity.Homework;
+import ua.hillel.homework.entity.Student;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

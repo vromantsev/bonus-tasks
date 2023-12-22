@@ -4,8 +4,8 @@
              version="2.1">
     <persistence-unit name="test-persistence-unit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>ua.hillel.entity.Student</class>
-        <class>ua.hillel.entity.Homework</class>
+        <class>ua.hillel.homework.entity.Student</class>
+        <class>ua.hillel.homework.entity.Homework</class>
 
         <!-- Specify the database connection properties -->
         <properties>

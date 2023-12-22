@@ -12,6 +12,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ua.hillel.homework.entity.Homework;
+import ua.hillel.homework.entity.Student;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;

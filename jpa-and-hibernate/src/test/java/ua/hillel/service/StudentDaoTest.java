@@ -1,7 +1,9 @@
 package ua.hillel.service;
 
 import org.junit.jupiter.api.Test;
-import ua.hillel.entity.Student;
+import ua.hillel.homework.entity.Student;
+import ua.hillel.homework.service.GenericDao;
+import ua.hillel.homework.service.StudentDao;
 import ua.hillel.utils.TestDataUtils;
 
 import java.util.List;

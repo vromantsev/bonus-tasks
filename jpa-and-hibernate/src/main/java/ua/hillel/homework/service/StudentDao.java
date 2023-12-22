@@ -1,9 +1,9 @@
-package ua.hillel.service;
+package ua.hillel.homework.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import ua.hillel.entity.Student;
+import ua.hillel.homework.entity.Student;
 
 import java.util.List;
 import java.util.Objects;

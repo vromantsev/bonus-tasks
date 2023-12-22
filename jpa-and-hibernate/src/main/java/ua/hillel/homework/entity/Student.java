@@ -1,4 +1,4 @@
-package ua.hillel.entity;
+package ua.hillel.homework.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
