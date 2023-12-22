@@ -1,4 +1,4 @@
-package ua.hillel.entity;
+package ua.hillel.homework.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -175,7 +175,7 @@ public class EntityMappingsTest {
         assertEquals("mark", column.name(), "Column name must be properly specified!");
     }
 
-    @DisplayName("Homework has proper mapping on the child side")
+    @DisplayName("Homework has proper many-to-one mapping on the child side")
     @Test
     public void homeworkHasProperMappingOnTheChildSide() throws NoSuchFieldException {
         Field student = homeworkClazz.getDeclaredField("student");

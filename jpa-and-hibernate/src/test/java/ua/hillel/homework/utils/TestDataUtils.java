@@ -1,4 +1,4 @@
-package ua.hillel.utils;
+package ua.hillel.homework.utils;
 
 import com.devskiller.jfairy.Fairy;
 import com.devskiller.jfairy.producer.person.Person;

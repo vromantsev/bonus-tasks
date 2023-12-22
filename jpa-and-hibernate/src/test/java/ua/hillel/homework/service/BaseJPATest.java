@@ -1,4 +1,4 @@
-package ua.hillel.service;
+package ua.hillel.homework.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
