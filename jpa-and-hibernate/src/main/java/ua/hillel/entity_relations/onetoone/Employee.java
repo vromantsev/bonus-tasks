@@ -20,7 +20,7 @@ public class Employee {
     private String email;
 
     @Column(name = "first_name", nullable = false)
-    private String fistName;
+    private String firstName;
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
@@ -31,7 +31,7 @@ public class Employee {
     public Employee(Long id, String email, String fistName, String lastName) {
         this.id = id;
         this.email = email;
-        this.fistName = fistName;
+        this.firstName = fistName;
         this.lastName = lastName;
     }
 
@@ -51,12 +51,12 @@ public class Employee {
         this.email = email;
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setFirstName(String fistName) {
+        this.firstName = fistName;
     }
 
     public String getLastName() {
@@ -87,7 +87,7 @@ public class Employee {
         return "Employee{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", fistName='" + fistName + '\'' +
+                ", fistName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
