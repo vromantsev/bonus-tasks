@@ -1,4 +1,4 @@
-package ua.hillel.sockets;
+package ua.hillel.sockets.demo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
